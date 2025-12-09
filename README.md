@@ -1,73 +1,187 @@
+🫁 AI + IoT Lung Disease Screening System
+
+A hybrid, AI-powered screening system for COVID-19, COPD, Pneumonia, and Normal lungs, combining Deep Learning–based chest X-ray analysis with IoT spirometry data. The system delivers a diagnosis in under 1 minute, designed for hospitals, emergency care, and rural healthcare centers.
+
+Features
+Core Features
+
+✅ Multimodal Diagnosis: Combines chest X-ray images (CNN) with spirometry metrics (FVC, FEV1, PEFR)
+
+✅ 1-Minute Prediction: Fast inference suitable for triage and mass screening
+
+✅ Disease Classification: Detects COVID-19, COPD, Pneumonia, and Normal cases
+
+✅ Explainable AI: Generates Grad-CAM heatmaps to highlight affected lung regions
+
+✅ Doctor Dashboard: Web-based interface to upload X-rays, enter spirometry values, and view results
+
+✅ Portable & Scalable: Designed to work with low-cost IoT spirometers and standard X-ray images
+
+✅ Rural-Friendly: Works in low-resource settings; can be adapted for partial offline usage
+
+Technical Features
+
+🧠 CNN + DNN Fusion Model: VGG16-based feature extraction fused with spirometry features using a deep neural network
+
+📉 PCA-Based Dimensionality Reduction: Reduces high-dimensional CNN features while preserving essential information
+
+🧪 Preprocessing Pipelines: X-ray normalization, resizing, and augmentation support
+
+📊 Evaluation Tools: Confusion matrix, accuracy, precision/recall metrics
+
+🧩 Modular Design: Separate modules for data loading, model training, inference, and IoT integration
+
+🌐 REST API for Prediction: Exposes endpoints to integrate with other hospital systems
+
+Tech Stack
+Machine Learning & Data
+
+Python 3.x – Core language
+
+TensorFlow / Keras – CNN and DNN models (VGG16 + custom fusion network)
+
+Scikit-Learn – PCA, metrics, and utilities
+
+Pandas / NumPy – Data handling and numerical operations
+
+OpenCV / Pillow – Image preprocessing
+
+IoT & Hardware
+
+Arduino / Microcontroller – Spirometer controller
+
+Airflow / Pressure Sensor – Captures exhalation data
+
+Serial / UART Communication – Sends spirometry data to host machine
+
+Backend & API
+
+Flask – RESTful API for prediction and dashboard backend
+
+Flask-CORS – Cross-origin support for frontend integration
+
+Frontend
+
+HTML5 / CSS3 – UI structure and styling
+
+JavaScript (Vanilla or React – optional) – Interactive dashboard
+
+Chart.js (optional) – Visualizing trends & metrics
+
+Project Structure
+.
+├── backend/
+│   ├── app.py                # Flask API server (prediction endpoints & dashboard)
+│   ├── models/
+│   │   ├── vgg16_cnn.h5      # Trained CNN model for X-ray features
+│   │   ├── pca.pkl           # PCA transformer for feature reduction
+│   │   └── fusion_dnn.h5     # Fusion DNN model for final classification
+│   ├── utils/
+│   │   ├── preprocessing.py  # Image & spirometry preprocessing
+│   │   ├── gradcam.py        # Grad-CAM generation utilities
+│   │   └── inference.py      # Helper functions for prediction
+│   ├── requirements.txt      # Python dependencies
+│   ├── static/
+│   │   └── heatmaps/         # Generated Grad-CAM images
+│   └── templates/
+│       └── dashboard.html    # Doctor dashboard UI (Jinja/HTML)
+│
+├── spirometer/
+│   ├── firmware.ino          # Arduino code for airflow sensor
+│   └── README.md             # Hardware setup & calibration guide
+│
+├── notebooks/
+│   ├── training_cnn.ipynb    # X-ray CNN training notebook
+│   ├── training_fusion.ipynb # Fusion model training notebook
+│   └── evaluation.ipynb      # Model evaluation & plots
+│
+├── data/
+│   ├── xray/                 # Sample X-ray images (anonymized)
+│   └── spirometry/           # Sample spirometry records
+│
+└── README.md                 # Project documentation
+
+Installation & Setup
+Prerequisites
+
+Python 3.8+
+
+(Optional) Virtual environment (venv/conda)
+
+Basic Arduino/IoT setup for spirometer (if testing hardware)
+
+Backend Setup
+
+Clone the repository
+
+git clone https://github.com/your-username/lung-disease-screening.git
+cd lung-disease-screening/backend
 
 
-md
-<div align="center">
+Create and activate virtual environment (recommended)
 
-# 🫁 **AI + IoT Lung Disease Screening System**
+python -m venv venv
+# Windows
+venv\Scripts\activate
+# Linux / macOS
+source venv/bin/activate
 
-### *A 1-minute hybrid diagnostic system combining Deep Learning + IoT Spirometry for COVID-19, COPD & Pneumonia.*
 
-</div>
+Install dependencies
 
----
+pip install -r requirements.txt
 
-## 🚀 Project Overview
 
-This project presents a **portable, fast, and highly accurate multimodal lung disease screening system**.  
-It combines:
+Start the Flask server
 
-- 📸 **CNN-based Chest X-ray analysis**
-- 🔌 **IoT Spirometer sensor readings** (FVC, FEV1, PEFR)
-- 🧠 **Deep Neural Network (Fusion Model)**
-- 🌐 **Cloud Dashboard** for doctors
+python app.py
 
-Ideal for **rural healthcare, emergency diagnostics, and rapid screenings**.
 
----
+By default, the backend runs at:
+👉 http://localhost:5000
 
-# 🛠️ Tech Stack
+Spirometer (IoT) Setup (Optional but recommended)
 
-### 🧑‍💻 Programming Languages  
-`Python • JavaScript • C • Java`
+Open spirometer/firmware.ino in the Arduino IDE
 
-### 🤖 Machine Learning  
-`TensorFlow • Keras • Scikit-Learn • Pandas • NumPy • OpenCV`
+Configure the correct board and COM port
 
-### 🔌 IoT & Hardware  
-`Arduino • Microcontroller • Airflow Sensor • Serial Communication`
+Upload the firmware to the microcontroller
 
-### 🌐 Web & Backend  
-`Flask • HTML • CSS • JavaScript • REST API`
+Connect airflow/pressure sensor to the board as per wiring comments in the file
 
----
+Spirometry data (FVC, FEV1, PEFR) will be sent via Serial to the host machine
 
-# ⭐ Key Features
+If you don’t have hardware yet, you can use dummy spirometry JSON or values entered manually in the dashboard.
 
-### 📸 CNN-based X-ray Analysis  
-- Fine-tuned **VGG16** model  
-- Extracts high-level deep features  
+Usage
+1. Doctor Dashboard Flow
 
-### 🔌 IoT Spirometer Integration  
-Measures lung parameters:  
-- **FVC**, **FEV1**, **PEFR**  
+Open the dashboard in a browser:
+👉 http://localhost:5000
 
-### 🔗 Fusion-based AI Model  
-- PCA for dimensionality reduction  
-- DNN fusion for improved accuracy  
+Upload a chest X-ray image (PNG/JPG)
 
-### ⚕️ Explainable AI  
-- **Grad-CAM heatmaps** highlight abnormal lung areas  
+Enter spirometry values:
 
-### 🌐 Cloud Dashboard  
-- Upload X-rays  
-- Enter spirometry values  
-- View prediction + confidence + heatmap  
+FVC
 
----
+FEV1
 
-# 🧠 System Architecture (Perfect ASCII Diagram)
+PEFR
+(or let the page fetch them from serial if auto-integration is implemented)
 
-```text
+Click “Predict”
+
+View:
+
+Predicted class: COVID-19 / COPD / Pneumonia / Normal
+
+Confidence score
+
+Grad-CAM heatmap of affected region
+
+System Architecture
                  ┌───────────────────────────┐
                  │     Chest X-Ray Image     │
                  └──────────────┬────────────┘
@@ -94,98 +208,169 @@ Measures lung parameters:
                            Grad-CAM Heatmap
                                    ▼
                            Doctor Dashboard
-````
 
----
+API Endpoints
 
-# 📊 Model Performance
+All endpoints are prefixed with /api.
 
-| Component             | Accuracy |
-| --------------------- | -------: |
-| X-ray CNN Model       |   92–95% |
-| Fusion Model (AI+IoT) |     94%+ |
-| Spirometry Classifier |     90%+ |
+GET /api/health
 
----
+Health check endpoint.
+Response:
 
-# 🧪 IoT Spirometer Workflow
+{ "status": "ok" }
 
-1. User blows into airflow sensor
-2. Microcontroller measures airflow + pressure
-3. Calculates **FVC, FEV1, PEFR**
-4. Sends readings to server
-5. AI model fuses the values with image features
-6. Final prediction generated
+POST /api/predict
 
----
+Run a full multimodal prediction.
 
-# ▶️ How to Run
+Request type: multipart/form-data
 
-### 1⃣ Clone the repo
+Fields:
 
-```bash
-git clone https://github.com/yourusername/lung-disease-screening.git
-cd lung-disease-screening
-```
+xray – X-ray image file (PNG/JPG)
 
-### 2⃣ Install dependencies
+fvc – float
 
-```bash
+fev1 – float
+
+pefr – float
+
+Sample Response:
+
+{
+  "prediction": "COVID-19",
+  "confidence": 0.96,
+  "class_index": 0,
+  "heatmap_path": "/static/heatmaps/covid_001.png"
+}
+
+POST /api/predict-json
+
+Send X-ray (base64 or path) + spirometry values as JSON.
+
+Request body example:
+
+{
+  "image_path": "data/xray/sample1.png",
+  "fvc": 3.1,
+  "fev1": 2.7,
+  "pefr": 430
+}
+
+Data Format (Internal)
+{
+  "xray": "path_or_binary",
+  "spirometry": {
+    "fvc": 3.1,
+    "fev1": 2.7,
+    "pefr": 430
+  }
+}
+
+Development
+Model Training
+
+notebooks/training_cnn.ipynb – Trains VGG16 on labeled X-ray dataset
+
+notebooks/training_fusion.ipynb – Trains fusion DNN using:
+
+Reduced CNN features (PCA)
+
+Spirometry metrics
+
+Evaluation
+
+notebooks/evaluation.ipynb – Plots confusion matrices, ROC curves, and class-wise metrics
+
+Experiments logged as:
+
+Accuracy
+
+F1-score
+
+Per-class performance
+
+Future Enhancements
+
+ Integrate additional lung diseases and severity levels
+
+ Add patient history and clinical parameters to the model
+
+ Implement offline mode with queued sync for rural centers
+
+ Add user authentication & role-based access for hospitals
+
+ Support DICOM medical image formats
+
+ Add full hardware calibration UI for spirometer
+
+ Deploy using Docker + Cloud (AWS/GCP/Azure)
+
+ Create a dedicated mobile app for field screening
+
+Troubleshooting
+Prediction Issues
+
+Ensure the X-ray image is frontal chest view and properly exposed
+
+Check that spirometry values are numeric and within realistic ranges
+
+Confirm that all three models (vgg16_cnn.h5, pca.pkl, fusion_dnn.h5) exist in the models/ directory
+
+Backend Issues
+
+Verify Python version: python --version
+
+Reinstall dependencies:
+
+pip install --upgrade pip
 pip install -r requirements.txt
-```
 
-### 3⃣ Start the server
 
-```bash
-python app.py
-```
+Ensure port 5000 is free or update the port in app.py
 
-### 4⃣ Upload X-ray + enter spirometry values
+IoT / Spirometer Issues
 
-→ Get prediction + heatmap instantly.
+Check COM port / serial settings in the firmware and Python script
 
----
+Ensure sensor wiring matches comments in firmware.ino
 
-# 📂 Folder Structure
+Calibrate the sensor in still air and test using sample breathing patterns
 
-```text
-project/
-│── models/           # Saved PCA, DNN, CNN models
-│── spirometer/       # Arduino code & sensor logic
-│── dashboard/        # Flask backend & UI
-│── data/             # X-ray dataset / spirometry samples
-│── results/          # Heatmaps, tests
-│── app.py
-│── README.md
-│── requirements.txt
-```
+🤝 Contributors
 
----
+Akash S – IoT Engineer & AI Model Integration
 
-# 📬 Contact
+Thiyaanes V – Deep Learning Research & Model Training,IoT Engineer
+Contributing
 
-📧 **[andrewakash07@gmail.com](mailto:andrewakash07@gmail.com)**
+Contributions are welcome! 🎉
+You can:
 
-If you found this useful, ⭐ the repo!
+Open an issue for bugs or feature requests
 
-```
+Submit a pull request with improvements
 
----
+Suggest datasets / clinical feedback for better validation
 
-# 🔥 **Everything is now PERFECT and GitHub-safe.**
+License
 
-### ✔ No image errors  
-### ✔ No broken links  
-### ✔ Clean ASCII workflow  
-### ✔ Professional structure  
-### ✔ Works even without internet  
+This project can be released under MIT License (or any license you choose).
+Update this section according to your preferred license.
 
-If you want, I can also generate:
+Acknowledgments
 
-✅ GitHub banner (ASCII or text-based)  
-✅ Profile README  
-✅ GitHub tags + badges  
-✅ “Future Work” section for premium look  
+Inspired by the need for fast, accessible respiratory diagnosis
 
-Just tell me **“add badges”** or **“add future work”** 💙
-```
+Based on concepts from:
+
+Medical imaging research
+
+Spirometry-based pulmonary diagnostics
+📬 Contact
+
+For queries or collaboration:
+📧 andrewakash07@gmail.com
+
+Thanks to mentors, faculty, and medical professionals who provided feedback.
