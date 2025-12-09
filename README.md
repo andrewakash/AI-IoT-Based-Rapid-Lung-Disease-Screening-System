@@ -102,8 +102,8 @@ Measures lung parameters:
 
 🧠 System Architecture (Perfect ASCII Diagram)
 
-```''`text
-                 ┌───────────────────────────┐
+```'`text
+                                 ┌───────────────────────────┐
                  │     Chest X-Ray Image     │
                  └──────────────┬────────────┘
                                 │
@@ -128,7 +128,7 @@ Measures lung parameters:
                                    ▼
                            Grad-CAM Heatmap
                                    ▼
-                           Doctor Dashboard````'`
+                           Doctor Dashboard```
 
 📊 Model Performance
 Component	Accuracy
