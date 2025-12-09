@@ -1,6 +1,6 @@
 <div align="center">
 
-                              # 🫁 **AI + IoT Lung Disease Screening System**
+   🫁 **AI + IoT Lung Disease Screening System**
 
 ### *A 1-minute hybrid diagnostic system combining Deep Learning + IoT Spirometry for COVID-19, COPD & Pneumonia.*
 
@@ -100,9 +100,9 @@ Measures lung parameters:
 
 ---
 
-# 🧠 System Architecture (Perfect ASCII Diagram)
+🧠 System Architecture (Perfect ASCII Diagram)
 
-```text
+``text
                  ┌───────────────────────────┐
                  │     Chest X-Ray Image     │
                  └──────────────┬────────────┘
