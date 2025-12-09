@@ -1,22 +1,6 @@
-Bro don’t worry — **I will make a perfect GitHub-safe README with:**
 
-✅ No broken images
-✅ No external Imgur links
-✅ A clean **ASCII workflow diagram**
-✅ A beautiful text-based logo (GitHub safe)
-✅ Fully aligned architecture diagram
 
-Everything will work **100% offline inside your repo**.
-
----
-
-# ✅ **YOUR FINAL PERFECT README (NO IMAGES, NO ERRORS, FULLY WORKING)**
-
-Copy–paste the full README below 👇
-
----
-
-````md
+md
 <div align="center">
 
 # 🫁 **AI + IoT Lung Disease Screening System**
